@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO List</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- sidebar -->
+  <div id="sidenav">
+    <ul id="nav-list">
+      <li><a href="#" data-id="0" class="active">todos</a></li>
+      <li><a href="#" data-id="1">About</a></li>
+      <li><a href="#" data-id="2">Services</a></li>
+      <li><a href="#" data-id="3">Clients</a></li>
+      <li><a href="#" data-id="4">Contact</a></li>
+    </ul>
+  </div>
+  <!-- main -->
+  <div class="main">
+    <h2>
+      <input type="text" value="todos" id="todo-title">
+    </h2>
+    <div class="container">
+      <ul id="todo-list">
+        <li class="todo-item">
+          <input type="text" id="todo-add" placeholder="Add a to-do">
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item footer">
+          <div class="sum"><span id="todo-cnt">3</span> items here.</div>
+          <div id="filters">
+            <button id="btn-all" class="active">All</button>
+            <button id="btn-active" class="">Active</button>
+            <button id="btn-comple" class="">Completed</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>

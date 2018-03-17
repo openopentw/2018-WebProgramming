@@ -1,0 +1,178 @@
+body {
+  background-color: #f5f5f5;
+}
+
+#sidenav {
+  height: 100%;
+  width: 15rem;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: lightblue;
+  overflow-x: hidden;
+  padding-top: 3rem;
+}
+
+#nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#sidenav a {
+  padding: 0.65rem 0.65rem 0.65rem 2rem;
+  text-decoration: none;
+  color: rgb(64, 64, 64);
+  display: block;
+  font-size: 1.2rem;
+}
+
+#sidenav .active,
+#sidenav a:hover {
+  background-color: #f5f5f5;
+}
+
+.main {
+  margin-left: 15rem; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+h2 {
+  margin: 1rem;
+  text-align: center;
+  font-size: 5rem;
+  line-height: 2rem;
+  color: lightblue;
+}
+
+h2 input {
+  text-align: center;
+  width: calc(100% - 2rem);
+  font-size: 5rem;
+  padding: 0.5rem;
+  color: lightblue;
+  background-color: transparent;
+  border: none;
+}
+
+h2 input:hover,
+h2 input:focus {
+  background-color: white;
+}
+
+.container {
+  margin: 2rem auto;
+  max-width: 30rem;
+}
+
+#todo-list {
+  list-style-type: none;
+  border: 2px solid lightblue;
+  padding: 0;
+  background-color: white;
+}
+
+.todo-item {
+  position: relative;
+  border-bottom: 1px solid lightblue;
+}
+
+.todo-item #todo-add,
+.todo-item .todo-edit {
+  display: block;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.todo-item #todo-add {
+  margin: 1rem;
+  width: calc(100% - 2rem);
+  color: #646464;
+}
+
+.todo-item #todo-add:placeholder {
+  color: grey;
+}
+
+.todo-item .todo-edit {
+  margin: 0 2.5rem 0 4rem;
+  padding: 1rem 0;
+  width: calc(100% - 7.5rem);
+  color: #404040;
+}
+
+.todo-item .todo-edit:hover,
+.todo-item .todo-edit:focus {
+  background-color: #e5e5e5;
+}
+
+.todo-item .todo-check {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+
+  width: 1.3em;
+  height: 1.3em;
+
+  cursor: pointer;
+}
+
+.todo-item .todo-remove {
+  display: none;
+
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  height: 100%;
+  width: 2rem;
+
+  font-size: 2rem;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.todo-item .todo-remove:hover {
+  color: red;
+}
+
+.footer {
+  padding: 0.7rem;
+}
+
+.sum,
+#filters {
+  display: inline;
+}
+
+.sum {
+  font-size: 0.8rem;
+  color: rgb(128, 128, 128);
+}
+
+#todo-cnt {
+  font-weight: bold;
+}
+
+#filters {
+  position: absolute;
+  right: 1rem;
+  top: 0.7rem;
+}
+
+#filters button {
+  background-color: transparent;
+  border: none;
+  color: rgb(128, 128, 128);
+
+  cursor: pointer;
+}
+
+#filters button.active {
+  border: 1px solid lightblue;
+  border-radius: 5px;
+}
