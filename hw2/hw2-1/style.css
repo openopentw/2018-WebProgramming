@@ -1,0 +1,39 @@
+html, body {
+  margin: 0;
+}
+
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  height: inherit;
+}
+
+.score_board {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+}
+
+#score {
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -1px;
+
+  color: transparent;
+  text-shadow: 0 0 4px white;
+}
+
+p {
+  margin: 0;
+  text-align: right;
+
+  color: rgba(255, 255, 255, 0.7);
+}
