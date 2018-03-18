@@ -16,21 +16,80 @@ body {
 
 #nav-list {
   margin: 0;
+  margin-bottom: 4rem;
   padding: 0;
   list-style-type: none;
 }
 
+#sidenav #add-list,
 #sidenav a {
-  padding: 0.65rem 0.65rem 0.65rem 2rem;
-  text-decoration: none;
-  color: rgb(64, 64, 64);
   display: block;
+  padding: 0.65rem 3rem 0.65rem 2rem;
+
   font-size: 1.2rem;
+
+  cursor: pointer;
 }
 
+#sidenav #add-list {
+  width: 100%;
+  text-align: left;
+
+  background-color: transparent;
+  border: none;
+
+  font-weight: bold;
+  color: black;
+}
+
+#sidenav a {
+  color: rgb(64, 64, 64);
+  text-decoration: none;
+}
+
+#sidenav #add-list:hover,
 #sidenav .active,
-#sidenav a:hover {
+#sidenav li:hover {
   background-color: #f5f5f5;
+}
+
+#sidenav li {
+  position: relative;
+}
+
+#sidenav .list-remove {
+  display: none;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 3rem;
+  padding: 0;
+
+  font-size: 2rem;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+#sidenav .list-remove:hover {
+  color: red;
+}
+
+#total-count {
+  padding: 0.5rem 0;
+
+  text-align: center;
+  font-size: 0.8rem;
+  color: grey;
+}
+
+#total-count span {
+  font-weight: bold;
 }
 
 .main {

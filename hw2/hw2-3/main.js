@@ -4,43 +4,139 @@ class Navbar {
     this.activeId = 0
 
     this.ulNavNode = document.getElementById('nav-list')
+    this.todoTitle = document.getElementById('todo-title')
+    this.addList = document.getElementById('add-list')
   }
 
   // public members
 
-  init (id = 0) {
-    this.ulNavNode.innerHTML = ''
+  init () {
+    this.ulNavNode.innerHTML = '<li><button id="add-list">✚ New List</li>'
+    this.addList = document.getElementById('add-list')
+    this.listenAddListClick()
+
     for (let i = 0; i < this.list.length; ++i) {
-      let itemNode = this.appendItemNode(i, this.list[i].title)
-      this.listenItemClick(itemNode)
+      if (this.list[i] !== undefined) {
+        let itemNode = this.appendItemNode(i, this.list[i].title)
+        this.listenItemHover(itemNode)
+        this.listenItemClick(itemNode)
+        this.listenRmvBtnClick(itemNode)
+      }
     }
-    this.ulNavNode.childNodes[id].childNodes[0].className = 'active'
+    this.ulNavNode.querySelector('[data-id="' + this.activeId + '"]').childNodes[0].className = 'active'
+    // this.ulNavNode.childNodes[this.activeId].childNodes[0].className = 'active'
+    // console.log(this.ulNavNode.childNodes[this.activeId].childNodes[0])
+
+    this.list[this.activeId].init()
+    this.changeTitle()
+    this.listenTitleFocus()
+    this.listenTitleChange()
+  }
+
+  updateTotalCount () {
+    let tot = 0
+    let comple = 0
+    for (let i = 0; i < this.list.length; ++i) {
+      if (this.list[i] !== undefined) {
+        for (let j = 0; j < this.list[i].list.length; ++j) {
+          if (this.list[i].list[j] !== undefined) {
+            ++tot
+            if (!this.list[i].list[j].checked) {
+              ++comple
+            }
+          }
+        }
+      }
+    }
+    document.getElementById('total-comple').innerHTML = comple
+    document.getElementById('total-cnt').innerHTML = tot
   }
 
   // private members
 
   appendItemNode (id, title) {
     let itemNode = document.createElement('LI')
-    itemNode.innerHTML = '<a href="#" data-id="' + id + '">' + title + '</a>'
-    this.ulNavNode.appendChild(itemNode)
+    itemNode.setAttribute('data-id', id)
+    itemNode.innerHTML = '<a>' + title + '</a>' +
+                         '<button class="list-remove">×</button>'
+    // this.ulNavNode.appendChild(itemNode)
+    this.ulNavNode.insertBefore(itemNode, this.ulNavNode.childNodes[this.ulNavNode.childNodes.length - 1])
     return itemNode
+  }
+
+  changeTitle () {
+    let h2 = this.todoTitle.parentNode
+    h2.innerHTML = '<input type="text" value="' + this.list[this.activeId].title + '" id="todo-title">'
+    this.todoTitle = document.getElementById('todo-title')
   }
 
   // listeners
 
+  listenTitleFocus () {
+    this.todoTitle.addEventListener('focus', function (e) {
+      e.target.select()
+    })
+  }
+
+  listenTitleChange () {
+    this.todoTitle.addEventListener('change', function (e) {
+      this.list[this.activeId].title = e.target.value
+      this.init()
+    }.bind(this))
+  }
+
+  listenItemHover (itemNode) {
+    itemNode.addEventListener('mouseenter', function (e) {
+      e.target.childNodes[1].style.display = 'block'
+    })
+    itemNode.addEventListener('mouseleave', function (e) {
+      e.target.childNodes[1].style.display = 'none'
+    })
+  }
+
   listenItemClick (item) {
-    item.addEventListener('click', function (e) {
+    item.childNodes[0].addEventListener('click', function (e) {
       let items = this.ulNavNode.childNodes
       for (let i = 0; i < items.length; ++i) {
         items[i].childNodes[0].className = ''
       }
       e.target.className = 'active'
 
-      let id = e.target.getAttribute('data-id')
-      this.list[id].init()
+      this.activeId = e.target.parentNode.getAttribute('data-id')
+      this.list[this.activeId].init()
+      this.changeTitle()
+      this.listenTitleFocus()
+      this.listenTitleChange()
+    }.bind(this))
+  }
+
+  listenAddListClick () {
+    this.addList.addEventListener('click', function (e) {
+      let id = this.list.length
+      let newTodo = new Todo(id, 'new todo list', [])
+      this.list.push(newTodo)
+
+      this.activeId = id
+      console.log(this.activeId)
+      this.init()
+      this.todoTitle.select()
+      this.todoTitle.focus()
+    }.bind(this))
+  }
+
+  listenRmvBtnClick (itemNode) {
+    itemNode.childNodes[1].addEventListener('click', function (e) {
+      let target = e.target
+      let id = target.parentNode.getAttribute('data-id')
+      delete this.list[id]
+
+      this.activeId = 0
+      this.init()
     }.bind(this))
   }
 }
+
+let navbar = new Navbar([])
 
 class Todo {
   constructor (id, title, list) {
@@ -74,6 +170,8 @@ class Todo {
     this.updateItemCount()
     this.mode = filter
     document.getElementById('btn-' + filter).className = 'active'
+
+    navbar.updateTotalCount()
   }
 
   // Private members
@@ -92,6 +190,7 @@ class Todo {
 
     this.todoListNode.insertBefore(itemNode, this.todoListNode.childNodes[this.todoListNode.childNodes.length - 1])
 
+    this.listenItemNodeFocus(itemNode)
     this.listenItemNodeChange(itemNode)
     this.listenRmvBtnClick(itemNode)
     this.listenItemNodeHover(itemNode)
@@ -121,6 +220,7 @@ class Todo {
       if (e.key === 'Enter') {
         this.list.push({checked: false, item: e.target.value})
         this.init(this.mode)
+        navbar.updateTotalCount()
       }
     }.bind(this))
   }
@@ -132,6 +232,7 @@ class Todo {
       delete this.list[id]
       target.parentNode.remove()
       this.updateItemCount()
+      navbar.updateTotalCount()
     }.bind(this))
   }
 
@@ -144,12 +245,20 @@ class Todo {
     })
   }
 
+  listenItemNodeFocus (itemNode) {
+    itemNode.childNodes[1].addEventListener('focus', function (e) {
+      let target = e.target
+      target.select()
+    })
+  }
+
   listenItemNodeChange (itemNode) {
     itemNode.childNodes[0].addEventListener('change', function (e) {
       let target = e.target
       let id = target.parentNode.getAttribute('data-id')
       this.list[id].checked = target.checked
       this.init(this.mode)
+      navbar.updateTotalCount()
     }.bind(this))
 
     itemNode.childNodes[1].addEventListener('change', function (e) {
@@ -180,11 +289,9 @@ let todoList = []
 
 let todo0 = new Todo(0, 'todos', [])
 todoList.push(todo0)
-let todo1 = new Todo(1, 'todossss', [{checked: true, item: 'aaa'}, {checked: false, item: 'bbb'}])
-todoList.push(todo1)
+// let todo1 = new Todo(1, 'todossss', [{checked: true, item: 'aaa'}, {checked: false, item: 'bbb'}])
+// todoList.push(todo1)
 
-todoList[0].init()
-
-let navbar = new Navbar(todoList)
+navbar = new Navbar(todoList)
 
 navbar.init()

@@ -8,12 +8,36 @@
 <body>
   <!-- sidebar -->
   <div id="sidenav">
+    <div id="total-count">
+      <span id="total-comple">0</span>
+      /
+      <span id="total-cnt">0</span>
+      items left in total.
+    </div>
     <ul id="nav-list">
-      <li><a href="#" data-id="0" class="active">todos</a></li>
-      <li><a href="#" data-id="1">About</a></li>
-      <li><a href="#" data-id="2">Services</a></li>
-      <li><a href="#" data-id="3">Clients</a></li>
-      <li><a href="#" data-id="4">Contact</a></li>
+      <li>
+        <a data-id="0" class="active">todos</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="1">About</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="2">Services</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="3">Clients</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="4">Contact</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <button id="add-list">✚ New List
+      </li>
     </ul>
   </div>
   <!-- main -->
