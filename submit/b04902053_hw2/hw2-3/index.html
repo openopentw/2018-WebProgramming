@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO List</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- sidebar -->
+  <div id="sidenav">
+    <div id="total-count">
+      <span id="total-comple">0</span>
+      /
+      <span id="total-cnt">0</span>
+      items left in total.
+    </div>
+    <ul id="nav-list">
+      <li>
+        <a data-id="0" class="active">todos</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="1">About</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="2">Services</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="3">Clients</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <a data-id="4">Contact</a>
+        <button class="list-remove">×</button>
+      </li>
+      <li>
+        <button id="add-list">✚ New List
+      </li>
+    </ul>
+  </div>
+  <!-- main -->
+  <div class="main">
+    <h2>
+      <input type="text" value="todos" id="todo-title">
+    </h2>
+    <div class="container">
+      <ul id="todo-list">
+        <li class="todo-item">
+          <input type="text" id="todo-add" placeholder="Add a to-do">
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" class="todo-check">
+          <input type="text" class="todo-edit" value="Buy a car.">
+          <button class="todo-remove">×</button>
+        </li>
+        <li class="todo-item footer">
+          <div class="sum"><span id="todo-cnt">3</span> items here.</div>
+          <div id="filters">
+            <button id="btn-all" class="active">All</button>
+            <button id="btn-active" class="">Active</button>
+            <button id="btn-comple" class="">Completed</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>
