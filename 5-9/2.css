@@ -1,0 +1,29 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.one {
+  height: 300px;
+  width: 30%;
+  flex: 1;
+  background-color: Tomato;
+  border: 2px dotted;
+}
+.two {
+  height: 300px;
+  width: 38%;
+  flex: 1;
+  background-color: DodgerBlue;
+  border: 2px dotted;
+}
+.three {
+  height: 300px;
+  width: 30%;
+  flex: 1;
+  background-color: Violet;
+  border: 2px dotted;
+}
